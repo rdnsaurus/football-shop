@@ -10,6 +10,7 @@ class Items(models.Model):
         ('accessories', 'Accessories'),
     ]
     
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     price = models.IntegerField()
     stock = models.IntegerField(default=0)
@@ -33,11 +34,14 @@ class Items(models.Model):
             raise ValueError("Not enough stock available")
         
     def get_thumbnail(self):
-        if self.category == 'jersey':
-            return '/static/images/jersey.png'
-        elif self.category == 'shoes':
-            return '/static/images/shoes.png'
-        elif self.category == 'accessories':
-            return '/static/images/accessories.png'
+        if self.thumbnail == None or self.thumbnail == '':
+            if self.category == 'jersey':
+                return '/static/images/jersey.png'
+            elif self.category == 'shoes':
+                return '/static/images/shoes.png'
+            elif self.category == 'accessories':
+                return '/static/images/accessories.png'
+        else:
+            return self.thumbnail
     
 

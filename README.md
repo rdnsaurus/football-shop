@@ -1,27 +1,23 @@
 # Checklist Tugas
 
-## Penjelasan Langkah Checklist Tugas 1
-Membuat sebuah proyek Django baru: Mengaktifkan venv, menginstall dependencies-library dan menjalankan perintah startproject pada admin (Command Prompt).
-Membuat aplikasi dengan nama main pada proyek tersebut.: Menjalankan perintah startapp pada admin (Command Prompt).
-Melakukan routing pada proyek agar dapat menjalankan aplikasi main: Menambahkan 'main' pada installed apps di settings.py (settings.py).
-Membuat model pada aplikasi main dengan nama Product dan memiliki atribut wajib: Mengisi file models sesuai intruksi (models.py).
-Membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML yang menampilkan nama aplikasi serta nama dan kelas kamu: Membuat fungsi pada views.py dengan mereturn fungsi render(request, [NAMA FILE HTMl].html) (views.py).
-Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada views.py: Isi file urls.py pada kedua direktori sesuai tutorial (main/urls.py dan main/football_shop).
-Melakukan deployment ke PWS terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet: Login sesuai akun, buat projek, simpan username-password, atur settingan projek dengan menghubungkan .env.prod dan akses aplikasi di settings.py (PWS).
-Membuat sebuah README.md: Membuat file README.md pada VSCode dan mulai menjawab pertanyaan (VS Code).
+## Data Delivery dalam Pengimplementasian Sebuah Platform
+Pada aplikasi yang membutuhkan data pengguna, data delivery dibutukan untuk mengambil dan menyampaikan data dari dan untuk klien/pengguna.  
 
-## Bagan Request Client ke Web Aplikasi berbasis Django
-![Routing](static/images/routing.png)
-Saat klien memberikan request ke server, maka wsgi.py akan menghubungkan python dengan server, lalu request akan dicocokkan pada URL di urls.py (direktori proyek), lalu request akan dijalankan sesuai fungsi yang ada di urls.py dan terhubung dengan views.py, lalu fungsi di views.py (kalau berhubungan dengan model, maka views akan mengambil model dari database) berjalan dan merender file html yang terhubung dengan fungsi, hasil render tersebut dikembalikan ke klien.
+## Lebih Baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+Semuanya memiliki kelebihan-kekurangan masing-masing sehingga tidak ada yang lebih baik dari keduanya, lalu mengapa JSON lebih populer? karena JSON lebih umum dan friendly dipake juga terintegrasi dengan javascript. 
 
-## Peran settings.py dalam proyek Django
-Mengatur konfigurasi, akses, database, file proyek.
+##  Fungsi dari Method is_valid()
+Mengecek kebenaran tipe atribut model dari user, tanpa method tersebut form yg diisi bisa salah arti dan fungsi.
 
-## Cara kerja migrasi database di Django?
-Membuat file migrasi dengan perintah 'makemigrations' dan memigrasikan data terbaru dengan perintah 'migrate', setelah menjalankan perintah migrate maka data terbaru akan menggantikan data di file migrasi yang lama.
+## csrf_token pada Form di Django
+Guna csrf_token untuk mengantisipasi penyerang terhadap suatu user, jika kita tidak menambahkan csrf_token maka form yang dibuat user dapat diakses dengan mudah oleh penyerang, misal form yg diisi adalah informasi pribadi user maka penyerang dapat menggunakan data tersebut untuk kepentingan pribadinya tanpa diketahui user.
 
-## Alasan framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
-Menurut saya, karena bahasa yang dipakai adalah python (mudah dipelajari) dan banyak platform yang menggunakan framework Django (lebih umum ditemukan).
+## Penjelasan Langkah Checklist Tugas 3
+Untuk keempat fungsi penampil data (XML/JSON), fungsi diisi dengan pengumpulan items, lalu di serialize seusai bentuk (XML/JSON), lalu menambahkan return value brupa httpresponse berbentuk XML/JSON data, lalu tiap fungsi ditambakan pada url_routing (urls.py).
 
-## Feedback untuk asisten dosen tutorial 1 
+Untuk fitur add dan details, akan dibuat fungsi di views sesuai konteks dan html masing-masing fitur, lalu pada tampilan awal html (main.html) ditambahkan href yang terhubung kedua html yang telah dibuat, lalu tiap fungsi ditambahkan pada url_routing (urls.py).
+
+untuk fitur details, urlsnya spesial sesuai id pada tiap items.
+
+## Feedback untuk asisten dosen tutorial 2
 Belum ada.
