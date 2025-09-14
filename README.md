@@ -21,3 +21,8 @@ untuk fitur details, urlsnya spesial sesuai id pada tiap items.
 
 ## Feedback untuk asisten dosen tutorial 2
 Belum ada.
+
+## Screenshot Data Viewer (Insomnia)
+![image](static/images/xmlss.png)
+![image] (static/images/jsonss.png)
+
