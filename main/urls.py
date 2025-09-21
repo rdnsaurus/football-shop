@@ -11,4 +11,7 @@ urlpatterns = [
     path('xml/<int:items_id>/', show_xml_by_id, name='show_xml_by_id'),
     path('json/<int:items_id>/', show_json_by_id, name='show_json_by_id'),
     path('details/<str:id>/', see_details, name='see_details'),
+    path('logout/', logout_user, name='logout'),
+    path('login/', login_user, name='login'),
+    path('register/', register, name='register'),
 ]

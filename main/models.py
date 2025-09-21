@@ -1,5 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 import uuid
+
 
 # Create your models here.
 
@@ -10,6 +12,7 @@ class Items(models.Model):
         ('accessories', 'Accessories'),
     ]
     
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     price = models.IntegerField()
@@ -43,5 +46,6 @@ class Items(models.Model):
                 return '/static/images/accessories.png'
         else:
             return self.thumbnail
+
     
 
