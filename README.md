@@ -1,22 +1,22 @@
 # Checklist Tugas
 
-## Django AuthenticationForm
-AuthenticationForm di Django membuat form autentikasi untuk user yang ingin login, kelebihannnya class ini menyediakan base form yang praktis dipakai pengembang aplikasi, kelemahannya class ini hanya berlaku jika seluruh user hanya memiliki 1 role.
+## Urutan CSS Selector
+Dari tipe CSS sendiri urutan paling pertama yg akan diimplement ke paling akhir yaitu inline, internal, external. Untuk selector, inline CSS ada pada urutan pertama, selanjutnya jika CSS tidak ada pada line html maka urutan yang diprioritaskan dari selector yang menggunakan id disusul class-attribute-pseudo class (ketiganya setara). Pengecualian untuk suatu CSS internal-external yang mendeclare attribute !important, jika terdapat dua !important pada style yang berbeda, maka dilihat dari urutan prioritas selector. Jika ada dua style dengan prioritas yang sama, maka yang akan bekerja adalah style yang dideclare duluan.
 
-## Implementasi Autentikasi dan Otorisasi di Django
-Autentikasi berupa kerja Django untuk mengecek user yang menggunakan aplikasi sesuai atau tidak, sedangkan Otorisasi berupa kerja Django untuk membatasi user-user yang tidak semestinya mendapatkan akses fitur aplikasi. Contoh Django untuk memberikan autentikasi ada pada AuthenticationForm berupa pengecekan username dan password, sedangkan contoh Django untuk memberikan autentikasi dapat berupa penggunaan subclass user_permissions pada group/user yang tersedia di aplikasi.
+## Responsive Web Design
+Responsive Web Design penting dalam pengembangan aplikasi web, karena web merupakan platform yang umumnya dapat diakses dari semua device, sehingga untuk menjaga keumuman tersebut web developer harus mengimplement fitur-fitur yang dapat diakses device lain juga. Contoh web yang menggunakan responsive web design ada di web https://muhathir-muhammad-footballshop.pbp.cs.ui.ac.id/ dan yang belum contohnya dapat dilihat dari github rdnsaurus pada commit tugas ke-4 (belum implement RWD), hal ini disebabkan pada tugas sebelumnya belum dikustomisasi untuk bagian mobile pada navbar.
 
-## Kelebihan dan Kekurangan Session-Cookies Dalam Menyimpan State
-Kelebihan mereka berdua sangat cocok dijadikan temporary memory (cache) agar saat web dijalankan user tidak ngeload terlalu lama karena state sebelumnya sudah disimpan. Kekurangan Session-Cookies, pada Cookies sizenya terbatas hanya 4096 bytes tiap cookies dan berkemungkinan diakses penyerang karena cookies ada pada sisi user, sedangkan pada session kekurangannya ada pada server yang harus menyimpan state, sehingga kalo usernya banyak berkemungkinan lama loadingnya.
+## Margin, Border, dan Padding
+Margin adalah jarak transparan dari luar border konten ke border lainnya. Border adalah batas yang membungkus suatu konten. Padding adalah jarak transparan dari konten ke border. Cara implementasi ketiga tools tersebut menggunakan CSS adalah dengan mendeclare langsung di inline (contoh: p-4, mx-auto, py-6) atau mendefinisikan suatu class yang ada konten berisi tools tersebut pada external/internal CSS.
 
-## Penggunaan Cookies
-Tidak, user beresiko terkena Replay Attack (man-in-the-middle). Cara mengatasinya di function logout ditambahkan method .aflush() ATAU .delete_cookie() pada session agar cookies terjaga pembaharuannya. 
+## Flex Box dan Grid Layout
+Flex Box adalah modul layout untuk mengatur konten sesuai kolom atau baris, sedangkan Grid Layout adalah model layout untuk mengatur konten sesuai kolom dan baris. Implementasi flexbox pada 1 dimensi, sedangkan Grid Layout 2 dimensi. 
 
-## Penjelasan Langkah Checklist Tugas 4
-Pada langkah pertama (implementasi login-logout-register) saya memakai class yang disediakan Django karena sudah cukup praktis (AuthenticationForm-logout-UserCreationForm), implementasinya sama seperti di Tutorial 3. Untuk mengakses aplikasi sebelumnya, saya memakai cookies, cara implementasinya cukup diberi cookies pada fungsi login di views.
+## Penjelasan Langkah Checklist Tugas 5
+Pada implementasi fungsi delete dan edit items, fungsi delete-edit sama seperti yang di tutorial dengan url yang berbeda saja. Request yang dipakai berupa delete dan post.
 
-Pada langkah kedua, setelah aplikasi dipush ke PWS, saya membuat dua akun dan tiga items sesuai instruksi dan fitur yang tersedia.
+Pada kustomisasi page HTML saya menggunakan tailwind sebagai framework CSS, yang dipasang di skrip pada base.html. Pada halaman login-register-addproduct-editproduct-detailproduct kurang lebih saya hanya membuat satu kontainer blok berwarna putih yang diisi dengan informasi/form dihiasi background Emirates Stadium atau animasi CSS (dari global.css).
 
-Pada langkah ketiga, untuk menghubungkan product dengan user, pada fungsi create_item pada pengisian form ditambahkan tiga line, line pertama berisi pengisian form dengan commit false agar tidak langsung disimpan, lalu line kedua berisi pendaftaran user pada item, lalu line ketiga berisi penyimpanan form yang sudah lengkap atributnya (implementasi dapat dilihat pada views.py line 32-34).
+Pada kustomisasi navbar, agar web tersebut konsisten baiknya pada mobile, saya menambahkan fitur tombol yang menyederhanakan informasi di desktop. Pada kustomisasi jika produk tidak ada/ada, di main.html saya menambahkan logic 'jika terdapat barang' akan menampilkan produk, jika tidak ada barang yang dipost maka akan menampilkan gambar dengan teks dibawahnya.
 
-Pada langkah keempat, untuk memberikan informasi waktu login terakhir, pada views.py setel cookies user pada fungsi show_main, lalu pada main.html tambahkan line yang memberikan informasi terkait login terakhir, hal ini didapat dari cookies yang sudah didaftarkan pada fungsi show_main, cookies berisi waktu saat login yang disetel pada fungsi login sehingga informasi akan tersampaikan.
+Untuk menampilkan tombol edit-delete pada card, saya menambahkannya ketika ia masuk ke halaman details dari item. Saya merestriksi kedua fitur ini hanya untuk user yang membuat items dengan menambahkan logic pada details.html dan menambahkan access (boolean type, untuk mempermudah logic) sebagai konten pada html.

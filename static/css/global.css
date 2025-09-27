@@ -3,6 +3,52 @@
     100% {transform: rotateX(360deg);}
 }
 
+@keyframes yanimation {
+    0% {transform: rotateY(0deg);}
+    100% {transform: rotateY(360deg);}
+}
+
+@keyframes zanimation {
+    0% {transform: rotateZ(0deg);}
+    100% {transform: rotateZ(360deg);}
+}
+
+@keyframes colortrans {
+    0% {color: red;}
+    25% {color: blue;}
+    50% {color: black;}
+    75% {color: blueviolet;}
+    100% {color: red;}
+}
+
+@keyframes shrinker {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(10); } /* membesar ke 125% */
+  100% { transform: scale(1); }
+}
+
 .xanimation {
     animation: xanimation 10s linear infinite;
+}
+
+.yanimation {
+    animation: yanimation 5s linear infinite;
+}
+
+.zanimation {
+    animation: zanimation 1ms linear infinite;
+}
+
+.colortrans {
+    animation: colortrans 5s linear infinite;
+}
+
+.shrinker {
+    display: inline-block;        
+    transform-origin: center center;
+    animation: shrinker 5s ease-in-out infinite;
+}
+
+.colortrans.shrinker {
+    animation: colortrans 5s linear infinite, shrinker 5s ease-in-out infinite;
 }

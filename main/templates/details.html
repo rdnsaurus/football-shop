@@ -30,6 +30,12 @@
         <div class="mt-6 text-center">
             <a href="/" class="text-red-600 hover:underline">Back to Shop</a>
         </div>
+        {% if access %}
+        <div class="mt-4 text-center">
+            <a href="{% url 'main:edit_item' item.id %}" class="text-red-600 hover:underline">Edit Item</a>
+            <a href="{% url 'main:delete_item' item.id %}" class="text-red-600 hover:underline ml-4">Delete Item</a>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock content %}

@@ -45,8 +45,9 @@ def see_details(request, id):
 
     context = {
         'item': item,
+        'user': request.user,
+        'access': item.user == request.user,
     }
-
     return render(request, 'details.html', context)
 
 @login_required(login_url='/login')
@@ -114,3 +115,24 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+@login_required(login_url='/login')
+def delete_item(request, id):
+    item = get_object_or_404(Items, pk=id)
+    item.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+@login_required(login_url='/login')
+def edit_item(request, id):
+    item = get_object_or_404(Items, pk=id)
+    form = ItemsEntryForm(request.POST or None, instance=item)
+
+    if form.is_valid() and request.method == 'POST':
+        form.save()
+        return redirect('main:show_main')
+    
+    context = {
+        'form': form,
+        'item': item,
+    }
+    return render(request, 'edit_item.html', context)
