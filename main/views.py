@@ -89,6 +89,8 @@ def register(request):
             form.save()
             messages.success(request, 'Your account has been successfully created!')
             return redirect('main:login')
+        else :         
+            messages.error(request, 'Ayaaya, kayana kamu bikinnya ga bener de...')
     else:
         form = AuthenticationForm(request)
     context = {'form':form}
@@ -104,6 +106,8 @@ def login_user(request):
         response = HttpResponseRedirect(reverse("main:show_main"))
         response.set_cookie('last_login', str(datetime.datetime.now()))
         return response
+      else :         
+        messages.error(request, 'Hmm make nih orang...')
 
    else:
       form = AuthenticationForm(request)

@@ -35,6 +35,26 @@
                 </div>
                 <button type="submit" class="w-full bg-red-600 text-white font-medium py-3 px-4 rounded-md hover:bg-red-700 transition-colors">Register</button>
             </form>
+            <!-- Messages Display -->
+            {% if messages %}
+              <div class="mt-6">
+                {% for message in messages %}
+                  <div 
+                    class="
+                      px-4 py-3 rounded text-sm border
+                      {% if message.tags == 'success' %}
+                        bg-green-50 border-green-200 text-green-700
+                      {% elif message.tags == 'error' %}
+                        bg-red-50 border-red-200 text-red-700
+                      {% else %}
+                        bg-gray-50 border-gray-200 text-gray-700
+                      {% endif %}
+                    ">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
             <p class="register-link">Already have an account? <a href="{% url 'main:login' %}" class="text-red-600">Login here</a></p>
          </div>
     </div>

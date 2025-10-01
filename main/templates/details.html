@@ -15,16 +15,20 @@
         {% else %}
         <h2 class="text-2xl font-bold mb-6 text-center">Item by Unknown</h2>
         {% endif %}
-        <div class="flex flex-col md:flex-row items-center md:items-start">
+        <div class="flex flex-col md:flex-row items-center md:items-stretch">
             <img src="{{ item.get_thumbnail }}" alt="{{ item.name }}" class="w-64 h-64 object-cover rounded mb-4 md:mb-0 md:mr-6">
-            <div class="flex-grow">
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ item.name }}</h3>
-                <p class="text-gray-600 mb-4">{{ item.description }}</p>
-                <p class="text-sm text-gray-500 mb-2">Stock: <span class="font-medium">{{ item.stock }}</span></p>
-                <p class="text-lg font-bold text-red-600 mb-4">Rp {{ item.price|intcomma }}</p>
-                <button class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-xl transition-colors duration-300">
-                    Add to Cart
-                </button>
+            <div class="flex flex-col">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ item.name }}</h3>
+                    <p class="text-gray-600 mb-4">{{ item.description }}</p>
+                </div>
+                <div class="mt-auto">
+                    <p class="text-sm text-gray-500 mb-2">Stock: <span class="font-medium">{{ item.stock }}</span></p>
+                    <p class="text-lg font-bold text-red-600 mb-4">Rp {{ item.price|intcomma }}</p>
+                    <button class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-xl transition-colors duration-300">
+                        Add to Cart
+                    </button>
+                </div>
             </div>
         </div>
         <div class="mt-6 text-center">

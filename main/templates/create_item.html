@@ -6,14 +6,17 @@
 {% endblock meta %}
 
 {% block content %}
-<div class="pt-16 min-h-screen bg-cover bg-center flex flex-col justify-center items-center">
-    <div class="bg-white bg-opacity-90 p-8 rounded shadow-md w-full max-w-md">
+<div class="pt-16 pb-24 min-h-screen bg-cover bg-center flex flex-col justify-center items-center">
+    <div class="bg-white bg-opacity-90 p-8 rounded shadow-md w-full max-w-md flex-col flex items-center">
         <h2 class="text-2xl font-bold mb-6 text-center">Create New Item</h2>
         <form method="POST" enctype="multipart/form-data" class="space-y-4">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700">Create Item</button>
         </form>
+        <div class="mt-6 text-center bg-white bg-opacity-50 rounded shadow-md px-4 py-2">
+            <a href="/" class="text-red-600 hover:underline">Back to Shop</a>
+        </div>
     </div>
 </div>
 {% endblock content %}

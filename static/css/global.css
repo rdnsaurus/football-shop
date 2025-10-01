@@ -36,7 +36,7 @@
 }
 
 .zanimation {
-    animation: zanimation 1ms linear infinite;
+    animation: zanimation 50s linear infinite;
 }
 
 .colortrans {
