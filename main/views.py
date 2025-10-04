@@ -82,15 +82,17 @@ def show_json_by_id(request, items_id):
    
 def register(request):
     form = UserCreationForm()
-
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Your account has been successfully created!')
             return redirect('main:login')
-        else :         
-            messages.error(request, 'Ayaaya, kayana kamu bikinnya ga bener de...')
+        else :
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, error)
+                    break
     else:
         form = AuthenticationForm(request)
     context = {'form':form}
