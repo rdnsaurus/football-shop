@@ -1,45 +1,57 @@
-{% extends "base.html" %}
-{% load static %}
 {% load humanize %}
-{% block meta %}
-  <title>Item Details</title>
-  <meta name="description" content="Details of the selected item.">
-{% endblock meta %}
 
-{% block content %}
-{% include 'navbar.html' %}
-<div class="pt-16 min-h-screen bg-cover bg-center flex flex-col justify-center items-center bg-black bg-opacity-50" style="background-image: url('{% static 'images/wallpaper.jpg' %}')">
-    <div class="bg-white bg-opacity-90 p-8 rounded shadow-md w-full max-w-2xl">
-        {% if item.user %}
-        <h2 class="text-2xl font-bold mb-6 text-center">Item by {{item.user.username}}</h2>
-        {% else %}
-        <h2 class="text-2xl font-bold mb-6 text-center">Item by Unknown</h2>
-        {% endif %}
-        <div class="flex flex-col md:flex-row items-center md:items-stretch">
-            <img src="{{ item.get_thumbnail }}" alt="{{ item.name }}" class="w-64 h-64 object-cover rounded mb-4 md:mb-0 md:mr-6">
-            <div class="flex flex-col">
-                <div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ item.name }}</h3>
-                    <p class="text-gray-600 mb-4">{{ item.description }}</p>
-                </div>
-                <div class="mt-auto">
-                    <p class="text-sm text-gray-500 mb-2">Stock: <span class="font-medium">{{ item.stock }}</span></p>
-                    <p class="text-lg font-bold text-red-600 mb-4">Rp {{ item.price|intcomma }}</p>
-                    <button class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-xl transition-colors duration-300">
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="mt-6 text-center">
-            <a href="/" class="text-red-600 hover:underline">Back to Shop</a>
-        </div>
-        {% if access %}
-        <div class="mt-4 text-center">
-            <a href="{% url 'main:edit_item' item.id %}" class="text-red-600 hover:underline">Edit Item</a>
-            <a href="{% url 'main:delete_item' item.id %}" class="text-red-600 hover:underline ml-4">Delete Item</a>
-        </div>
-        {% endif %}
+<div id="detailsModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+  <div id="detailsModalContent" class="bg-white bg-opacity-95 p-8 m-4 rounded-2xl shadow-lg w-full max-w-2xl transform transition-all duration-200 opacity-0 scale-95">
+    <div class="flex justify-between border-b mb-4">
+      <button type="button" class="absolute top-4 left-4 text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition duration-150" onclick="hideModal()" aria-label="Close modal">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+          viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <h2 id="modalUser" class="text-2xl font-bold mb-4 text-center flex-grow">Item by Unknown</h2>
     </div>
+
+    <div class="flex flex-col mx-4 md:flex-row items-center md:items-stretch">
+      <img id="modalImg" src="" alt="Item Image" class="w-64 h-64 object-cover rounded mb-4 md:mb-0 md:mr-6">
+      <div class="flex flex-col w-full">
+        <div>
+          <h3 id="modalTitle" class="text-xl font-semibold text-gray-900 mb-2"></h3>
+          <p id="modalDesc" class="text-gray-600 mb-4 overflow-y-auto h-12 md:h-20"></p>
+        </div>
+        <div class="mt-auto">
+          <p class="text-sm text-gray-500 mb-2">
+            Stock: <span id="modalStock" class="font-medium">0</span>
+          </p>
+          <p id="modalPrice" class="text-lg font-bold text-red-600 mb-4 overflow-x-auto">Rp 0</p>
+          <div class="flex justify-between overflow-x-auto gap-2">
+            <button class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-xl text-base md:text-sm md:py-1.5 md:px-3">
+              Add to Cart
+            </button>
+            <div id="userAccess" class="hidden">
+              <button id="deleteBtn" class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 ml-auto mr-2 rounded-xl text-base md:text-sm md:py-1.5 md:px-3" onclick='return confirm("Are you sure you want to delete this article?")'>
+                Delete Item
+              </button>
+              <button id="editBtn" class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-xl text-base md:text-sm md:py-1.5 md:px-3">
+                Edit Item
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{% endblock content %}
+
+<div id="confirmModal"
+  class="fixed inset-0 hidden items-center justify-center z-[9999]">
+  <div class="bg-white rounded-xl shadow-lg p-6 w-80 text-center">
+    <h3 class="text-lg font-semibold mb-4 text-gray-800">Yakin hapus item ini?</h3>
+    <div class="flex justify-center gap-4">
+      <button id="confirmYes"
+        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Ya</button>
+      <button id="confirmNo"
+        class="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300 transition">Batal</button>
+    </div>
+  </div>
+</div>

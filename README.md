@@ -1,22 +1,16 @@
 # Checklist Tugas
 
-## Urutan CSS Selector
-Dari tipe CSS sendiri urutan paling pertama yg akan diimplement ke paling akhir yaitu inline, internal, external. Untuk selector, inline CSS ada pada urutan pertama, selanjutnya jika CSS tidak ada pada line html maka urutan yang diprioritaskan dari selector yang menggunakan id disusul class-attribute-pseudo class (ketiganya setara). Pengecualian untuk suatu CSS internal-external yang mendeclare attribute !important, jika terdapat dua !important pada style yang berbeda, maka dilihat dari urutan prioritas selector. Jika ada dua style dengan prioritas yang sama, maka yang akan bekerja adalah style yang dideclare duluan.
+## Perbedaan Synchronous-Asynchronous Request
+Singkatnya, pada asinkronus, klien tidak perlu meminta request ke server secara terus-menerus tiap melakukan event karena sudah dihandle skrip yang diberikan server ke klien pada awal mengakses web, sedangkan pada sinkronus request berupa request dari klien yang tidak dihandle skrip server sehingga langsung menuju request dihandle langsung oleh server.
 
-## Responsive Web Design
-Responsive Web Design penting dalam pengembangan aplikasi web, karena web merupakan platform yang umumnya dapat diakses dari semua device, sehingga untuk menjaga keumuman tersebut web developer harus mengimplement fitur-fitur yang dapat diakses device lain juga. Contoh web yang menggunakan responsive web design ada di web https://muhathir-muhammad-footballshop.pbp.cs.ui.ac.id/ dan yang belum contohnya dapat dilihat dari github rdnsaurus pada commit tugas ke-4 (belum implement RWD), hal ini disebabkan pada tugas sebelumnya belum dikustomisasi untuk bagian mobile pada navbar.
+## AJAX di Django
+Khususnya di Django, penggunaan AJAX ada pada inisiasi url dan fungsi di views dengan alur request-response yang hampir sama dengan tidak mengimplement AJAX. Pada penggunaan AJAX, return dari fungsi di views berupa respon data (JSON/XML) sehingga return-value akan diproses pada skrip yang sudah ada saat web dibuka.
 
-## Margin, Border, dan Padding
-Margin adalah jarak transparan dari luar border konten ke border lainnya. Border adalah batas yang membungkus suatu konten. Padding adalah jarak transparan dari konten ke border. Cara implementasi ketiga tools tersebut menggunakan CSS adalah dengan mendeclare langsung di inline (contoh: p-4, mx-auto, py-6) atau mendefinisikan suatu class yang ada konten berisi tools tersebut pada external/internal CSS.
+## Keuntungan AJAX
+UX akan lebih cepat (misalnya penggunaan Modal), bisa menampilkan respon dengan mudah (misalnya penggunaan Toast), dan tidak payah berpindah-pindah URL (dibanding render).
 
-## Flex Box dan Grid Layout
-Flex Box adalah modul layout untuk mengatur konten sesuai kolom atau baris, sedangkan Grid Layout adalah model layout untuk mengatur konten sesuai kolom dan baris. Implementasi flexbox pada 1 dimensi, sedangkan Grid Layout 2 dimensi. 
+## Keamanan Login dan Register dengan AJAX
+Untuk memastikan keamanan klien, sebagai developer kita sebaiknya menggunakan fitur AJAX pada CSRF Token (menjaga integritas akun) dan Rate Limiting (membatasi upaya penyerang untuk login-register secara sembarangan) serta menggunakan HTTPS (agar aman di jaringan publik). 
 
-## Penjelasan Langkah Checklist Tugas 5
-Pada implementasi fungsi delete dan edit items, fungsi delete-edit sama seperti yang di tutorial dengan url yang berbeda saja. Request yang dipakai berupa delete dan post.
-
-Pada kustomisasi page HTML saya menggunakan tailwind sebagai framework CSS, yang dipasang di skrip pada base.html. Pada halaman login-register-addproduct-editproduct-detailproduct kurang lebih saya hanya membuat satu kontainer blok berwarna putih yang diisi dengan informasi/form dihiasi background Emirates Stadium atau animasi CSS (dari global.css).
-
-Pada kustomisasi navbar, agar web tersebut konsisten baiknya pada mobile, saya menambahkan fitur tombol yang menyederhanakan informasi di desktop. Pada kustomisasi jika produk tidak ada/ada, di main.html saya menambahkan logic 'jika terdapat barang' akan menampilkan produk, jika tidak ada barang yang dipost maka akan menampilkan gambar dengan teks dibawahnya.
-
-Untuk menampilkan tombol edit-delete pada card, saya menambahkannya ketika ia masuk ke halaman details dari item. Saya merestriksi kedua fitur ini hanya untuk user yang membuat items dengan menambahkan logic pada details.html dan menambahkan access (boolean type, untuk mempermudah logic) sebagai konten pada html.
+## Pengaruh AJAX Terhadap UX 
+Dengan AJAX semua terasa lebih praktis, modern, dan terlihat ringan di sisi klien/user
