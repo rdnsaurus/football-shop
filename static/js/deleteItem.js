@@ -43,11 +43,10 @@ window.initDeleteHandler = function(deleteUrlTemplate) {
         document.dispatchEvent(new CustomEvent('itemDeleted'));
       } else {
         document.dispatchEvent(new CustomEvent('itemDeletedFailed'));
-        showToast('Gagal menghapus item', 'error');
       }
     } catch (error) {
       console.error('Error:', error);
-      showToast('Terjadi kesalahan saat menghapus!', 'error');
+        document.dispatchEvent(new CustomEvent('itemDeletedFailed'));
     } finally {
       currentId = null;
     }

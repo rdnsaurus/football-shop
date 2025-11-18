@@ -1,4 +1,6 @@
 import datetime
+import json
+import requests
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.core import serializers
@@ -72,6 +74,7 @@ def show_json(request):
             'thumbnail':item.thumbnail, 
             'category':item.category, 
             'stock': item.stock,
+            'user' : item.user.username if item.user else None,
         }
         for item in item_list
     ]
@@ -197,3 +200,49 @@ def edit_item(request, id):
     item.save()
     
     return JsonResponse({'status': 'success', 'message': 'Item updated'}, status=200)
+
+def proxy_image(request):
+    image_url = request.GET.get('url')
+    if not image_url:
+        return HttpResponse('No URL provided', status=400)
+    
+    try:
+        # Fetch image from external source
+        response = requests.get(image_url, timeout=10)
+        response.raise_for_status()
+        
+        # Return the image with proper content type
+        return HttpResponse(
+            response.content,
+            content_type=response.headers.get('Content-Type', 'image/jpeg')
+        )
+    except requests.RequestException as e:
+        return HttpResponse(f'Error fetching image: {str(e)}', status=500)
+    
+@csrf_exempt
+def create_items_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        name = data.get('name')
+        price = int(data.get('price', 0))
+        stock = int(data.get('stock', 0)) 
+        description = data.get('description')
+        thumbnail = data.get('thumbnail')
+        category = data.get('category')
+        user = request.user
+        
+        new_item = Items(
+            name=name,
+            price=price,
+            stock=stock,
+            description=description,
+            thumbnail=thumbnail,
+            category=category,
+            user=user
+        )
+        new_item.save()
+        
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
